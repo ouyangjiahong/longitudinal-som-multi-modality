@@ -9,8 +9,8 @@ import pdb
 import psutil
 import sklearn.cluster
 
-from model_clean import *
-from util_clean import *
+from model import *
+from util import *
 
 # set seed
 seed = 10
