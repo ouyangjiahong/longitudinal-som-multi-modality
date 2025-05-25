@@ -1,0 +1,80 @@
+
+phase: 'train'
+# phase: 'test'
+load_yaml: True
+gpu: '0'
+
+# pretraining setting
+continue_train: False
+ckpt_name: 'model_best.pth.tar'
+
+# continue_train: True
+# ckpt_name: 'pretrained_model_best.pth.tar'
+
+######################## ADNI ########################
+data_type: 'pair'
+input_type: 'ROI'
+
+# dataset_name: 'ADNI_MRI_ROI'
+# image_type: 'MRI'
+# data_csv_path: '/data/jiahong/data/ADNI/roi/MRI_ROI_filtered_quality_filtered_nan_normalized.csv'
+# # data_csv_path: '/data/jiahong/data/ADNI/roi/MRI_ROI_filtered_quality_filtered_nan_regress_CN_age_normalized.csv'
+# train_idx_csv_path: '/data/jiahong/longitudinal-som/data/ADNI_ROI/MRI_ROI_pair_train.csv'
+# val_idx_csv_path: '/data/jiahong/longitudinal-som/data/ADNI_ROI/MRI_ROI_pair_val.csv'
+# test_idx_csv_path: '/data/jiahong/longitudinal-som/data/ADNI_ROI/MRI_ROI_pair_test.csv'
+# train_idx_csv_path: '/data/jiahong/longitudinal-som/data/ADNI_ROI/MRI_ROI_pair_train_notCN.csv'
+# val_idx_csv_path: '/data/jiahong/longitudinal-som/data/ADNI_ROI/MRI_ROI_pair_val_notCN.csv'
+# test_idx_csv_path: '/data/jiahong/longitudinal-som/data/ADNI_ROI/MRI_ROI_pair_test_notCN.csv'
+
+dataset_name: 'ADNI_Amyloid_ROI'
+image_type: 'Amyloid'
+# data_csv_path: '/data/jiahong/data/ADNI/roi/Amyloid_ROI_filtered_quality_filtered_nan_normalized.csv'
+data_csv_path: '/data/jiahong/data/ADNI/roi/Amyloid_ROI_filtered_quality_filtered_nan_normalized_regressed.csv'
+train_idx_csv_path: '/data/jiahong/longitudinal-som/data/ADNI_ROI/Amyloid_ROI_pair_train.csv'
+val_idx_csv_path: '/data/jiahong/longitudinal-som/data/ADNI_ROI/Amyloid_ROI_pair_val.csv'
+test_idx_csv_path: '/data/jiahong/longitudinal-som/data/ADNI_ROI/Amyloid_ROI_pair_test.csv'
+
+
+# data_csv_path: '/data/jiahong/data/ADNI/roi/Amyloid_MRI_ROI_filtered_quality_filtered_nan_normalized.csv'
+# train_idx_csv_path: '/data/jiahong/longitudinal-som/data/ADNI_ROI/Amyloid_MRI_ROI_pair_train.csv'
+# val_idx_csv_path: '/data/jiahong/longitudinal-som/data/ADNI_ROI/Amyloid_MRI_ROI_pair_val.csv'
+# test_idx_csv_path: '/data/jiahong/longitudinal-som/data/ADNI_ROI/Amyloid_MRI_ROI_pair_test.csv'
+
+epochs: 20
+batch_size: 64
+# num_fold: 5
+# fold: 0
+# train_all: False
+shuffle: True
+lr: 0.01
+
+latent_size: 64
+embedding_size: [4, 8]
+init_emb: 'random' #'pretrained-kmeans-switch' #
+model_name: 'SOMPairVisitDirection'
+
+# parameters for MRI
+# lambda_recon: 1.
+# lambda_recon_zq: 1.
+# lambda_commit: 50.
+# commit_ratio: 1.
+# lambda_som: 50.
+# lambda_dir: 5.
+# dir_thres: 0.1
+
+# parameters for PET
+lambda_recon: 1.
+lambda_recon_zq: 1.
+lambda_commit: 200.
+commit_ratio: 1.
+lambda_som: 200.
+lambda_dir: 0.0001
+dir_thres: 0.1
+
+
+warmup_epochs: 0
+Tmax: 1.
+Tmin: 0.1
+
+ckpt_timelabel: '2024_2_1_22_1'     # amyloid
+# ckpt_timelabel: '2024_2_1_22_49'      # MRI

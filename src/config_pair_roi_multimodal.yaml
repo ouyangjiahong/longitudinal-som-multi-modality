@@ -1,0 +1,65 @@
+
+phase: 'train'
+# phase: 'test'
+load_yaml: True
+gpu: '0'
+
+# pretraining setting
+continue_train: False
+ckpt_name: 'model_best.pth.tar'
+
+# continue_train: True
+# ckpt_name: 'pretrained_model_best.pth.tar'
+
+######################## ADNI ########################
+data_type: 'pair'
+input_type: 'ROI'
+
+dataset_name: 'ADNI_MRI_Amyloid_ROI'
+image_type_1: 'MRI'
+image_type_2: 'Amyloid'
+data_csv_path: '/data/jiahong/data/ADNI/roi/Amyloid_MRI_ROI_filtered_quality_filtered_nan_normalized.csv'
+train_idx_csv_path: '/data/jiahong/longitudinal-som/data/ADNI_ROI/Amyloid_MRI_ROI_pair_train.csv'
+val_idx_csv_path: '/data/jiahong/longitudinal-som/data/ADNI_ROI/Amyloid_MRI_ROI_pair_val.csv'
+test_idx_csv_path: '/data/jiahong/longitudinal-som/data/ADNI_ROI/Amyloid_MRI_ROI_pair_test.csv'
+
+pretrain_model_path_1: '/data/jiahong/longitudinal-som/ckpt/ADNI_MRI_ROI/SOMPairVisitDirection/2024_2_1_22_49/'
+pretrain_model_path_2: '/data/jiahong/longitudinal-som/ckpt/ADNI_Amyloid_ROI/SOMPairVisitDirection/2024_2_1_22_1/'
+# jointly_train: False  # if false, only train model 1, otherwise 1 and 2 together
+jointly_train: True
+
+
+epochs: 30
+batch_size: 64
+# num_fold: 5
+# fold: 0
+# train_all: False
+shuffle: True
+lr: 0.01
+
+latent_size: 64
+# embedding_size: [1, 16]
+embedding_size: [4, 8]
+init_emb: 'random' #'pretrained-kmeans-switch' #
+
+model_name: 'SOMPairVisitDirection'
+lambda_recon: 1.
+lambda_recon_zq: 1.
+lambda_commit_m1: 50.
+lambda_commit_m2: 200.
+commit_ratio: 1.
+lambda_som_m1: 50.
+lambda_som_m2: 200.
+lambda_dir_m1: 5.
+lambda_dir_m2: 0.001
+dir_thres: 0.1
+lambda_multimodal: 0.001
+multimodal_thres: 0.01
+lambda_m2_ratio: 20.
+
+
+warmup_epochs: 0
+Tmax: 1.
+Tmin: 0.1
+
+ckpt_timelabel: '2024_1_19_11_48'             # MRI, all,
